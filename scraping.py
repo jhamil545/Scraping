@@ -94,6 +94,7 @@ def parse_relative_date(relative_date_str):
     days_match = re.search(r'(\d+)\s*días?\s*atrás', relative_date_str)
     hours_match = re.search(r'(\d+)\s*horas?\s*atrás', relative_date_str)
     minutes_match = re.search(r'(\d+)\s*mins?\s*atrás', relative_date_str)
+    
     if days_match:
         days = int(days_match.group(1))
         return now - timedelta(days=days)
@@ -104,6 +105,8 @@ def parse_relative_date(relative_date_str):
         minutes = int(minutes_match.group(1))
         return now - timedelta(minutes=minutes)
     else:
+        # Maneja el caso en el que la fecha no esté en el formato esperado
+        print(f"Fecha no reconocida: {relative_date_str}")
         return now  # Fallback to current time if the format is not recognized
 
 def format_date(date_obj):

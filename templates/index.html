@@ -22,7 +22,7 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='news/css/style.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="path/to/owl.carousel.min.css">
 <link rel="stylesheet" href="path/to/owl.theme.default.min.css">
@@ -44,19 +44,49 @@
             </div>
             
         </div>
+        
         <div class="row align-items-center py-2 px-lg-5">
             <div class="col-lg-4">
-                <a href="" class="navbar-brand d-none d-lg-block">
+                <a href="" class="">
                     <h1 class="m-0 display-5 text-uppercase"><span class="text-primary">News</span>Scraping</h1>
                 </a>
+                
             </div>
             <div class="col-lg-8 text-center text-lg-right">
-             
+                <a href="{{ url_for('login') }}" class="navbar-brand d-none d-lg-block">
+                    <h1 class="m-0 display-5 text-uppercase">
+                        <span class="text-primary">LOGIN</span>
+                    </h1>
+                </a>
+                
             </div>
         </div>
     </div>
     <!-- Topbar End -->
+    <style>
+        .navbar-brand {
+            border: 2px solid black;
+            padding: 10px;
+            display: inline-block;
+            text-align: right; /* Alinea el texto a la derecha */
+            float: right; /* Mueve el bloque hacia la derecha */
+            transition: background-color 0.3s, color 0.3s;
+        }
 
+        .navbar-brand:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .navbar-brand:hover h1, 
+        .navbar-brand:hover span {
+            color: white;
+        }
+
+        .text-primary {
+            color: blue; /* Color primario */
+        }
+    </style>
 
     <!-- Navbar Start -->
     <div class="container-fluid p-0 mb-3">
@@ -168,7 +198,7 @@
                     </div>
                     {% for category in categories %}
                         <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
-                            <img class="img-fluid w-100 h-100" src="{{ url_for('static', filename='img/cat.jpg') }}" style="object-fit: cover;">
+                            <img class="img-fluid w-100 h-100" src="{{ url_for('static', filename='news/img/cat.jpg') }}" style="object-fit: cover;">
                             <a href="{{ url_for('category_articles', category_name=category) }}" class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
                                 {{ category }}
                             </a>
@@ -652,7 +682,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='news/js/main.js') }}"></script>
 
 
 </body>

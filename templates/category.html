@@ -23,7 +23,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='news/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -148,7 +148,8 @@
                                         <span>{{ article.date_published }}</span>
                                     </div>
                                     <a class="h4" href="{{ url_for('article_details', article_id=article.id) }}">{{ article.title }}</a>
-                                    <p class="m-0">{{ article.description }}</p>
+                                    <p class="m-0">{{ article.description[:100] }}...</p>
+
                                 </div>
                             </div>
                             
@@ -425,7 +426,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='news/js/main.js') }}"></script>
 </body>
 
 </html>

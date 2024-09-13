@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Article</title>
+    <!-- Agregar Tailwind o tu framework de CSS preferido -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-4">Edit Article</h1>
+        <form action="/edit/{{ article.id }}" method="POST" class="bg-white p-6 rounded shadow-md">
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" value="{{ article.title }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="url" class="block text-sm font-medium text-gray-700">URL</label>
+                <input type="text" id="url" name="url" value="{{ article.url }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="date_published" class="block text-sm font-medium text-gray-700">Date Published</label>
+                <input type="date" id="date_published" name="date_published" value="{{ article.date_published }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL</label>
+                <input type="text" id="image_url" name="image_url" value="{{ article.image_url }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="website_id" class="block text-sm font-medium text-gray-700">Website ID</label>
+                <input type="text" id="website_id" name="website_id" value="{{ article.website_id }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ article.description }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                <input type="text" id="category" name="category" value="{{ article.category }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    
+
+</body>
+</html>
