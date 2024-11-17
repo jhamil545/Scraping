@@ -3,58 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
-  <link rel="shortcut icon" href="${static_url('img/fav.png')}" type="image/x-icon">  
+  <link rel="shortcut icon" href="./img/fav.png" type="image/x-icon">  
   <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
   <link rel="stylesheet" type="text/css" href="${static_url('dashboard/css/style.css')}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <style>
-    /* Estilo para el contenedor de los cards */
-    .categories-cards {
-        display: flex;
-        flex-wrap: wrap; /* Permite que los cards se envuelvan en varias filas si es necesario */
-        gap: 16px; /* Espacio entre los cards */
-        justify-content: center; /* Centra los cards horizontalmente */
-        padding: 16px; /* Espaciado interno del contenedor */
-    }
-
-    /* Estilo para cada card */
-    .report-card {
-        flex: 1 1 calc(25% - 16px); /* Ajusta el ancho de los cards para 4 en una fila, menos el espacio del gap */
-        box-sizing: border-box; /* Asegura que el padding y border se incluyan en el ancho total */
-        min-width: 200px; /* Ancho mínimo para cada card */
-        max-width: 300px; /* Ancho máximo para cada card */
-    }
-
-    /* Estilo para el card en sí */
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Media queries para pantallas más pequeñas */
-    @media (max-width: 1200px) {
-        .report-card {
-            flex: 1 1 calc(33.33% - 16px); /* 3 en una fila */
-        }
-    }
-
-    @media (max-width: 900px) {
-        .report-card {
-            flex: 1 1 calc(50% - 16px); /* 2 en una fila */
-        }
-    }
-
-    @media (max-width: 600px) {
-        .report-card {
-            flex: 1 1 100%; /* 1 en una fila */
-        }
-    }
-</style>
-  <title>Welcome</title>
   
+  <title>Welcome To Cleopatra</title>
 </head>
 <body class="bg-gray-100">
 
@@ -64,8 +21,9 @@
 
     <!-- logo -->
     <div class="flex-none w-56 flex flex-row items-center">
-      <img src="img/logo.png" class="w-10 flex-none">
-      <strong class="capitalize ml-1 flex-1">DASHBOARD</strong>
+      <img src="${url_for('static', filename='dashboard/img/logo2.png')}" class="w-10 flex-none" alt="Logo">
+
+      <strong class="capitalize ml-1 flex-1">PANEL DE CONTROL</strong>
 
       <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
         <i class="fad fa-list-ul"></i>
@@ -98,7 +56,8 @@
 
           <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
             <div class="w-8 h-8 overflow-hidden rounded-full">
-              <img class="w-full h-full object-cover" src="img/user.svg" >
+              <img src="${url_for('static', filename='dashboard/img/user1.jpg')}" class="w-10 flex-none" alt="Logo">
+
             </div>
 
             <div class="ml-2 capitalize flex ">
@@ -132,20 +91,22 @@
             </a>
             <!-- end item -->
 
-            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href=>
+            <!-- item -->
+            <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
               <i class="fad fa-comment-alt-dots text-xs mr-1"></i>
-              Noticias
+              chats
             </a>
+            <!-- end item -->
 
             <hr>
 
-            <!-- templates/layout.html o el archivo HTML donde tengas el botón -->
-<form action="{{ url_for('logout') }}" method="get">
-  <button type="submit" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-      <i class="fad fa-user-times text-xs mr-1"></i>
-      Log out
-  </button>
-</form>
+            <!-- En tu archivo layout.html o el archivo HTML donde tengas el botón -->
+            <form action="${ url_for('logout') }" method="get">
+              <button type="submit" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
+                  <i class="fad fa-user-times text-xs mr-1"></i>
+                  Log out
+              </button>
+            </form>
 
 
           </div>
@@ -401,62 +362,37 @@
 
       <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p>
 
-      <a href="{{ url_for('dashboard.index') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-          <i class="fad fa-chart-pie text-xs mr-2"></i>
-          Analytics dashboard
-      </a>
-    
+      <a href="${url_for('dashboard.index')}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-chart-pie text-xs mr-2"></i>
+        Analytics dashboard
+    </a>
+  
 
-      <!-- link -->
-      <a href="{{ url_for('dashboard.dashboard2') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-shopping-cart text-xs mr-2"></i>
-        ecommerce dashboard
-      </a>
-      <!-- end link -->
+    <!-- link -->
+    <a href="{{ url_for('dashboard.dashboard2') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <i class="fad fa-shopping-cart text-xs mr-2"></i>
+      ecommerce dashboard
+    </a>
+    <!-- end link -->
 
       <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
 
       <!-- link -->
-      <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-envelope-open-text text-xs mr-2"></i>
-        email
+      <a href="${url_for('dashboard.list_user')}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-user-circle text-xs mr-2"></i>
+        USUARIOS
       </a>
       <!-- end link -->
 
       <!-- link -->
-      <a href="{{ url_for('list_articles') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+      <a href="${url_for('dashboard.list_articles')}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
         <i class="fad fa-comments text-xs mr-2"></i>
         NOTICIAS
-      </a>
+    </a>
       <!-- end link -->
-
-      <!-- link -->
-      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-shield-check text-xs mr-2"></i>
-        todo
-      </a>
-      <!-- end link -->
-
-      <!-- link -->
-      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-calendar-edit text-xs mr-2"></i>
-        calendar
-      </a>
-      <!-- end link -->
-
-      <!-- link -->
-      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-file-invoice-dollar text-xs mr-2"></i>
-        invoice
-      </a>
-      <!-- end link -->
-
-      <!-- link -->
-      <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-        <i class="fad fa-folder-open text-xs mr-2"></i>
-        file manager
-      </a>
-      <!-- end link -->   
+  
+      
+      
       
 
     </div>
@@ -468,187 +404,441 @@
   <!-- strat content -->
   <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
+    <!-- congrats & summary -->
+    <div class="grid grid-cols-3 lg:grid-cols-1 gap-5">
+      <!-- congrats -->
+<div class="card col-span-1">
 
-    <!-- Categories Cards -->
-    <div class="categories-cards">
-      % if categories_and_counts:
-          % for item in categories_and_counts:
-              <div class="report-card">
-                  <div class="card">
-                      <div class="card-body flex flex-col">
-                          <!-- top -->
-                          <div class="flex flex-row justify-between items-center">
-                              <div class="h6 text-indigo-700 fad fa-tag"></div>
-                              <h2 class="text-xl font-semibold">${item['category']}</h2>
-                          </div>
-                          <!-- end top -->
-
-                          <!-- bottom -->
-                          <div class="mt-8">
-                              <p>${item['count']} noticias</p>
-                          </div>
-                          <!-- end bottom -->
-                      </div>
-                  </div>
-                  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
-              </div>
-          % endfor
-      % else:
-          <p>No categories available</p>
-      % endif
-  </div>
-  <div>
-    <!-- Articles Today Card -->
-<div class="report-card">
-  <div class="card">
-      <div class="card-body flex flex-col">
-          <!-- top -->
-          <div class="flex flex-row justify-between items-center">
-              <div class="h6 text-indigo-700 fad fa-calendar-day"></div>
-              <h2 class="text-xl font-semibold">Articles Today Count</h2>
-          </div>
-          <!-- end top -->
-
-          <!-- bottom -->
-          <div class="mt-8">
-              <p class="text-lg font-bold">${articles_today_count} articles</p>
-          </div>
-          <!-- end bottom -->
-      </div>
-  </div>
-  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
-</div>
-
-<!-- Articles per Day Card -->
-<div class="report-card">
-  <div class="card">
-      <div class="card-body flex flex-col">
-          <!-- top -->
-          <div class="flex flex-row justify-between items-center">
-              <div class="h6 text-indigo-700 fad fa-calendar-week"></div>
-              <h2 class="text-xl font-semibold">Articles per Day (Last 15 Days)</h2>
-          </div>
-          <!-- end top -->
-
-          <!-- bottom -->
-          <div class="mt-8">
-              % if dates_and_counts:
-                  <ul>
-                  % for item in dates_and_counts:
-                      <li>${item['date']}: ${item['count']} articles</li>
-                  % endfor
-                  </ul>
-              % else:
-                  <p>No data available</p>
-              % endif
-          </div>
-          <!-- end bottom -->
-      </div>
-  </div>
-  <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
-</div>
-<div>
-
-</div>
-  </div>
-
-    <!-- General Report -->
-    <div class="grid grid-cols-4 gap-6 xl:grid-cols-1">
+    <div class="card-body h-full flex flex-col justify-between">
+      <!-- Sección del gráfico -->
+      
+      <ul id="websiteList" data-websites="${websites}" data-counts="${website_article_counts}">
+            <div class=" flex flex-col">
+                <h2 class="text-xl font-semibold">Noticias en cada diario</h2>
+                <div id="trafficSourcesChart" class="w-full h-64"></div>
+            </div>
+        
+            <canvas id="websiteChart" width="400" height="200"></canvas>
 
 
-
-
-
-
-  <h1>Articles Today Count: ${articles_today_count}</h1>
-
-  <h2>Articles per Day (Last 15 Days)</h2>
-  % if dates_and_counts:
-      <ul>
-      % for item in dates_and_counts:
-          <li>${item['date']}: ${item['count']}</li>
-      % endfor
-      </ul>
-  % else:
-      <p>No data available</p>
-  % endif
-
-  
-
-  <h2>Articles by Website</h2>
-  % if websites:
-      <ul>
-      % for website, count in zip(websites, website_article_counts):
-          <li>Website ID ${website}: ${count}</li>
-      % endfor
-      </ul>
-  % else:
-      <p>No website data available</p>
-  % endif
-
-
+    </div>
     
 
 
-</div>
-    <!-- End General Report -->
 
-    <!-- strat Analytics -->
-    <div class="mt-6 grid grid-cols-2 gap-6 xl:grid-cols-1">
+    <div id="articleData" 
+        data-dates="${all_dates_str}" 
+        data-counts="${all_counts_str}">
+    </div>
 
-    
 
-    <!-- carts -->
-    <div class="flex flex-col">
+    <div class="card-body h-full flex flex-col justify-between">
+      <!-- Sección del gráfico -->
+      
+
+            <div class=" flex flex-col">
+                <h2 class="text-xl font-semibold">Noticias cada dia</h2>
+                <div id="trafficSourcesChart" class="w-full h-64"></div>
+            </div>
+        
+            <canvas id="chLine"></canvas>
+
 
         
 
-       
+    </div>
+    
+
+    
+
+  </div>
+
+
+
+<!-- end congrats -->
+      <div class="card p-0 overflow-hidden col-span-2 lg:col-span-1 flex flex-row lg:flex-col">
+     
+    <!-- right -->
+    <div class="border-r border-gray-200 w-2/3 lg:w-full lg:mb-5">
+        
+      
+      
+    
+    
+
+    
+    <!-- end right -->
+    <div id="categoryData" 
+        data-categories="${categories}" 
+        data-counts="${counts}">
+    </div>
+
+    <div style="width: 500px">
+        <canvas id="grafica"></canvas>
+    </div>
+
+  </div>
+  <div>
+    
+    <!-- HTML -->
+<div class="total-articles-container">
+  <p>Total de artículos:</p>
+  <br>
+  <span id="totalArticlesCount" class="counter">${total_articles_count}</span>
+</div>
+<br>
+<div class="total-articles-container">
+  <p>Artículos publicados hoy:</p>
+  <br>
+  <span id="totalArticlesCount" class="counter">${articles_today_count}</span>
+</div>
+
+<!-- CSS -->
+<style>
+  .total-articles-container {
+      display: flex;
+      align-items: center;
+      font-family: Arial, sans-serif;
+  }
+
+  .total-articles-container p {
+      font-size: 1.5em;
+      color: #555;
+      margin-right: 10px;
+  }
+
+  .counter {
+      font-size: 2.5em;
+      color: #ff6347; /* Color rojo anaranjado */
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      background: #f1c40f;
+      padding: 10px 20px;
+      border-radius: 10px;
+      animation: pulse 1s infinite;
+  }
+
+  /* Animación de pulso */
+  @keyframes pulse {
+      0%, 100% {
+          transform: scale(1);
+      }
+      50% {
+          transform: scale(1.1);
+      }
+  }
+</style>
+
+  </div>
+    
+
+</div>
+
+
 
     </div>
-    <!-- end charts -->
+    <!-- end congrats & summary -->
+
+    
+<!-- congrats & summary -->
+<div class="grid grid-cols-3 lg:grid-cols-1 gap-5">
+  <!-- congrats -->
+<div class="card col-span-1">
+
+<div class="card-body h-full flex flex-col justify-between">
+  <!-- Sección del gráfico -->
+  
+  
+        <div class=" flex flex-col">
+            <h2 class="text-xl font-semibold">Noticias por meses en cada diario</h2>
+            <div id="trafficSourcesChart" class="w-full h-64"></div>
+        </div>
+    
+        <!-- Canvas para el gráfico de radar -->
+        <div style="width: 300px;">
+          <div id="radarData" data-websites="{{ websites_json }}" data-datasets="{{ datasets_json }}"></div>
+            <canvas id="grafica2"></canvas>
+
+        </div>
+
+
+        
+
+</div>
+
+
+
+
+
+
+
+<div class="card-body h-full flex flex-col justify-between">
+  <!-- Sección del gráfico -->
+  
+
+        <div class=" flex flex-col">
+            <h2 class="text-xl font-semibold">Noticias cada dia</h2>
+            <div id="trafficSourcesChart" class="w-full h-64"></div>
+        </div>
+    
+        
+
+
+    
+
+</div>
+
+
 
 
 </div>
-    <!-- end Analytics -->
 
-    <!-- Sales Overview -->
-    <div class="card mt-6">
 
+    <!-- end congrats -->
+    <div class="card p-0 overflow-hidden col-span-2 lg:col-span-1  lg:flex-col">
+     
+      
+          
+        <div><h2>Nube de Palabras de los Títulos</h2></div>
+        <div>
+          <img src="data:image/png;base64,${img_base64}" alt="Nube de Palabras">
+        </div>
+        
+
+      
+  
     
+      
+  
+  </div>
+  
+  
+  
+      </div>
+      <!-- end congrats & summary -->
 
+
+    <!-- best seller & traffic -->
+    <div class="grid grid-cols-2 lg:grid-cols-1 gap-5 mt-5">
+      <div class="card">
+
+    <div class="card-body">
+        
+      
     
-
-</div>
-    <!-- end Sales Overview -->
-
-    <!-- start numbers -->
-    <div class="grid grid-cols-5 gap-6 xl:grid-cols-2">
-
-    
-
     </div>
-    <!-- end Browser Stats -->
-
-    
-
-
-</div>
-    <!-- end quick Info -->
+    <!-- end best seller & traffic -->
 
 
   </div>
   <!-- end content -->
 
 </div>
+<!-- end wrapper -->
 
 
+
+<script>
+  // Obtener los datos desde los atributos data- del elemento
+  var websites = document.getElementById('websiteList').getAttribute('data-websites').replace(/[\[\]'"]/g, '').split(',');
+  var websiteArticleCounts = document.getElementById('websiteList').getAttribute('data-counts').replace(/[\[\]'"]/g, '').split(',').map(Number); // Convertir a números
+
+  // Verifica los valores de los arreglos en la consola
+  console.log("Sitios web:", websites);
+  console.log("Conteo de artículos:", websiteArticleCounts);
+
+  // Crear el gráfico de barras
+  var ctx = document.getElementById('websiteChart').getContext('2d');
+  var websiteChart = new Chart(ctx, {
+      type: 'bar',  // Cambiamos el tipo a "bar" para el gráfico de barras
+      data: {
+          labels: websites, // Los nombres de los sitios web como etiquetas
+          datasets: [{
+              label: 'Cantidad de artículos',
+              data: websiteArticleCounts, // Los conteos de artículos
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+
+
+<script>
+
+  // Obtener los datos desde los atributos `data-` del elemento
+  var dates = document.getElementById('articleData').getAttribute('data-dates').split(',');
+  var counts = document.getElementById('articleData').getAttribute('data-counts').split(',').map(Number);
+
+  // Verifica los valores de los arreglos en la consola
+  console.log("Fechas:", dates);
+  console.log("Conteos:", counts);
+
+
+  // Crear el gráfico de líneas
+  var ctx = document.getElementById('chLine').getContext('2d');
+  var chLine = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: dates, // Las fechas como etiquetas en el eje X
+          datasets: [{
+              label: 'Cantidad de artículos',
+              data: counts, // Los conteos de artículos
+              backgroundColor: 'rgba(0, 123, 255, 0.2)',
+              borderColor: '#007bff',
+              borderWidth: 2,
+              pointBackgroundColor: '#007bff',
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              fill: true
+          }]
+      },
+      options: {
+          scales: {
+              x: {
+                  title: {
+                      display: true,
+                      text: 'Fecha'
+                  },
+                  ticks: {
+                      maxRotation: 90,
+                      minRotation: 45
+                  }
+              },
+              y: {
+                  beginAtZero: true,
+                  title: {
+                      display: true,
+                      text: 'Cantidad de Artículos'
+                  }
+              }
+          },
+          plugins: {
+              legend: {
+                  display: true,
+                  position: 'top'
+              }
+          },
+          responsive: true
+      }
+  });
+</script>
+
+<script>
+  // Gráfico de pastel
+  // Obtener los datos desde los atributos `data-` del elemento
+  var categories = document.getElementById('categoryData').getAttribute('data-categories').replace(/[\[\]'"]/g, '').split(',');
+  var counts = document.getElementById('categoryData').getAttribute('data-counts').replace(/[\[\]'"]/g, '').split(',').map(Number); // Convertir a números
+
+  // Verifica los valores de los arreglos en la consola
+  console.log("Categorías:", categories);
+  console.log("Conteos:", counts);
+
+  // Colores para el gráfico
+  const colorsPie = ['rgb(69,177,223)', 'rgb(99,201,122)', 'rgb(203,82,82)', 'rgb(229,224,88)', 'rgb(148,112,202)', 'rgb(255,167,64)'];
+
+  // Configuración del gráfico de pastel
+  const dataPie = {
+      labels: categories,
+      datasets: [{
+          data: counts,
+          backgroundColor: colorsPie.slice(0, categories.length)  // Usa tantos colores como categorías haya
+      }]
+  };
+
+  const configPie = {
+      type: 'pie',
+      data: dataPie,
+      options: {
+          responsive: true,
+          plugins: {
+              legend: {
+                  position: 'top',
+              },
+          }
+      }
+  };
+
+  // Crear el gráfico de pastel
+  const graphPie = document.getElementById("grafica");
+  new Chart(graphPie, configPie);
+</script>
+
+
+<script>
+  // Obtener los datos pasados desde Flask en formato JSON
+  const labels = ${labels_json | n};  // `| n` asegura que se manejen como JSON en Mako
+  const datasets = ${radar_datasets_json | n};
+
+  // Configuración del gráfico de radar
+  const data = {
+      labels: labels,
+      datasets: datasets
+  };
+
+  const config = {
+      type: 'radar',
+      data: data,
+      options: {
+          responsive: true,
+          plugins: {
+              legend: {
+                  position: 'top',
+              },
+          },
+          scales: {
+              r: {
+                  angleLines: {
+                      display: false
+                  },
+                  suggestedMin: 0,
+                  suggestedMax: 100  // Ajusta según los valores esperados
+              }
+          }
+      }
+  };
+
+  // Crear el gráfico de radar
+  const graph = document.getElementById("grafica2");
+  new Chart(graph, config);
+</script>
+
+
+
+
+<!-- Bootstrap JS (opcional, para funcionalidades adicionales de Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="{{ url_for('static', filename='dashboard/js/scripts.js') }}"></script>
+<script src="${static_url('dashboard/js/scripts.js') }"></script>
 <!-- end script -->
 
 </body>
 </html>
+

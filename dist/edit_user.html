@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Article</title>
+    <!-- Agregar Tailwind o tu framework de CSS preferido -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto mt-8">
+        <h1 class="text-2xl font-bold mb-4">Editar Usuario</h1>
+        <form action="/edituser/{{ user.id }}" method="POST" class="bg-white p-6 rounded shadow-md">
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700">Usuario</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
+                <input type="text" id="email" name="email" value="{{ user.email }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <input type="date" id="password" name="password" value="{{ user.password }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="first_name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="last_name" class="block text-sm font-medium text-gray-700">Apellido</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            
+
+            <div class="mb-4">
+                <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
+                <input type="text" id="role" name="role" value="{{ user.role }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="mb-4">
+                <label for="membership">Membresía</label>
+                <select name="membership" id="membership">
+                    <option value="Gratis" {% if user.membership == 'Gratis' %}selected{% endif %}>Gratis</option>
+                    <option value="Premium" {% if user.membership == 'Premium' %}selected{% endif %}>Premium</option>
+                </select>
+            </div>
+            
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+
+    
+
+</body>
+</html>

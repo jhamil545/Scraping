@@ -146,6 +146,7 @@
                                         <a href="">{{ article.category }}</a>
                                         <span class="px-1">/</span>
                                         <span>{{ article.date_published }}</span>
+                                        <span>Diario: {{ article.website_id }}</span>   
                                     </div>
                                     <a class="h4" href="{{ url_for('article_details', article_id=article.id) }}">{{ article.title }}</a>
                                     <p class="m-0">{{ article.description[:100] }}...</p>

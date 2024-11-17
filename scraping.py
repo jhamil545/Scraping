@@ -38,8 +38,11 @@ def insert_article(title, url, date_published, image_url, category, description)
     cursor = conn.cursor()
 
     try:
-        # Convierte la fecha relativa a formato DATETIME
-        parsed_date = parse_relative_date(date_published)
+        # Convierte la fecha a formato DATETIME
+        if "atrás" in date_published:
+            parsed_date = parse_relative_date(date_published)
+        else:
+            parsed_date = parse_absolute_date(date_published)
         formatted_date = format_date(parsed_date)
 
         # Verifica si el artículo ya existe en la base de datos
@@ -89,6 +92,14 @@ def scrape_news_page(news_url):
         print(f"Error al acceder a la noticia: {news_url}")
         return None, 'Error al cargar la página', 'No description'
 
+
+def clean_description(description):
+    # Elimina patrones no deseados con expresiones regulares
+    # Por ejemplo, elimina información de contacto o direcciones
+    # Elimina todo el contenido desde "Contacto Periodístico" y "CENTRAL TELEFONICA"
+    description = re.sub(r'Contacto Periodístico:.*', '', description)  # Elimina desde "Contacto Periodístico"
+    description = re.sub(r'CENTRAL TELEFONICA:.*', '', description)  # Elimina desde "CENTRAL TELEFONICA"
+    return description.strip()  # Devuelve la descripción limpia
 def parse_relative_date(relative_date_str):
     now = datetime.now()
     days_match = re.search(r'(\d+)\s*días?\s*atrás', relative_date_str)
@@ -105,9 +116,38 @@ def parse_relative_date(relative_date_str):
         minutes = int(minutes_match.group(1))
         return now - timedelta(minutes=minutes)
     else:
-        # Maneja el caso en el que la fecha no esté en el formato esperado
         print(f"Fecha no reconocida: {relative_date_str}")
         return now  # Fallback to current time if the format is not recognized
+
+def parse_absolute_date(date_str):
+    months = {
+        'enero': 1,
+        'febrero': 2,
+        'marzo': 3,
+        'abril': 4,
+        'mayo': 5,
+        'junio': 6,
+        'julio': 7,
+        'agosto': 8,
+        'septiembre': 9,
+        'octubre': 10,
+        'noviembre': 11,
+        'diciembre': 12
+    }
+    
+    # Extraer el día, el mes y el año de la cadena de fecha
+    match = re.match(r'(\d+)\s+(\w+),\s+(\d+)', date_str)
+    if match:
+        day = int(match.group(1))
+        month_name = match.group(2).lower()
+        year = int(match.group(3))
+
+        if month_name in months:
+            month = months[month_name]
+            return datetime(year, month, day)
+    
+    print(f"Fecha no reconocida en formato absoluto: {date_str}")
+    return datetime.now()  # Fallback to current time if parsing fails
 
 def format_date(date_obj):
     return date_obj.strftime('%Y-%m-%d %H:%M:%S')
@@ -132,13 +172,14 @@ def scrape_category_page(category_url):
             # Inserta los datos del artículo en la base de datos
             insert_article(title, news_url, date, image_url, categories, description)
 
-            print(f"\nTítulo: {title}")
-            print(f"Fecha: {date}")
-            print(f"Categoría(s): {categories}")
-            print(f"URL: {news_url}")
-            print(f"URL de la imagen: {image_url if image_url else 'No image URL'}")
-            print(f"Descripción: {description if description else 'No description'}")
-            print("-" * 40)
+            # Imprime información de la noticia para depuración
+            # print(f"\nTítulo: {title}")  
+            # print(f"Fecha: {date}")  
+            # print(f"Categoría(s): {categories}")  
+            # print(f"URL: {news_url}")  
+            # print(f"URL de la imagen: {image_url if image_url else 'No image URL'}")  
+            # print(f"Descripción: {description if description else 'No description'}")  
+            # print("-" * 40)  
 
     else:
         print(f"Error al realizar el scraping en la categoría: {response.status_code}")
@@ -155,7 +196,7 @@ def main():
 
     for category in categories:
         category_url = f'{base_url}/category/{category}/'
-        print(f"Scraping category: {category_url}")
+        #print(f"Scraping category: {category_url}")
         scrape_category_page(category_url)
 
     print("Extracción y almacenamiento exitoso")

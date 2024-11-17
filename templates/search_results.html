@@ -61,72 +61,38 @@
     </nav>
     <!-- Navbar End -->
 
-    <!-- Main Content Start -->
+    <!-- Search Results Section Start -->
     <div class="container my-4">
+        <div class="bg-light py-2 px-4 mb-4">
+            <h3 class="m-0">Resultados de búsqueda para "{{ query }}"</h3>
+        </div>
+
+        {% if search_results %}
         <div class="row">
-            <!-- Left Column: Featured News in Cards -->
-            <div class="col-lg-8">
-                <h2 class="text-uppercase mb-4 text-primary">Noticias Destacadas</h2>
-                {% for article in recent_articles[:5] %}
-                <div class="card mb-4">
-                    <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.title }}" style="height: 300px; object-fit: cover;">
+            {% for article in search_results %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ article.title }}</h5>
-                        <p class="card-text text-muted">{{ article.date_published.strftime('%B %d, %Y') if article.date_published else 'Fecha no disponible' }}</p>
-                        <span><i class="fas fa-newspaper"></i> Diario: {{ article.website_name }}</span>
-                        <p class="card-text">{{ article.excerpt }}</p>
+                        <p class="card-text text-muted">
+                            <span><i class="fas fa-tag"></i> {{ article.category }}</span><br>
+                            <span><i class="far fa-calendar-alt"></i> {{ article.date_published.strftime('%B %d, %Y') if article.date_published else 'Fecha no disponible' }}</span><br>
+                            <span><i class="fas fa-newspaper"></i> Diario: {{ article.website_id }}</span>
+                        </p>
                         <a href="{{ url_for('article_details', article_id=article.id) }}" class="btn btn-outline-primary">Leer más</a>
                     </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <!-- Right Column: Categories -->
-            <div class="col-lg-4">
-                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                    <h3 class="m-0">CATEGORIAS</h3>
-                </div>
-                {% for category in categories %}
-                <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
-                    <img class="img-fluid w-100 h-100" src="{{ url_for('static', filename='news/img/cat.jpg') }}" style="object-fit: cover;">
-                    <a href="{{ url_for('category_articles', category_name=category) }}" class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
-                        {{ category }}
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <!-- Main Content End -->
-
-    <!-- Articles by Category Section Start -->
-    <div class="container my-4">
-        <h2 class="text-uppercase mb-4 text-primary">Noticias por Categoría</h2>
-        <div class="row">
-            {% for category, articles in articles_by_category.items() %}
-            <div class="col-md-6 mb-4">
-                <h3 class="text-dark">{{ category }}</h3>
-                <div class="row">
-                    {% for article in articles[:3] %}
-                    <div class="col-12 mb-3">
-                        <div class="card">
-                            <img src="{{ article.image_url }}" class="card-img-top" alt="{{ article.title }}" style="height: 200px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ article.title }}</h5>
-                                <p class="card-text text-muted">
-                                    <span><i class="far fa-calendar-alt"></i> {{ article.date_published.strftime('%B %d, %Y') if article.date_published else 'Fecha no disponible' }}</span><br>
-                                    <span><i class="fas fa-newspaper"></i> Diario: {{ article.website_name }}</span>
-                                </p>                                <a href="{{ url_for('article_details', article_id=article.id) }}" class="btn btn-outline-primary btn-sm">Leer más</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
                 </div>
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="container bg-light py-4 px-3 text-center rounded">
+            <p class="m-0">No se encontraron resultados para "{{ query }}"</p>
+        </div>
+        {% endif %}
     </div>
-    <!-- Articles by Category Section End -->
+    <!-- Search Results Section End -->
 
     <!-- Footer Start -->
     <footer class="bg-light text-center py-4">

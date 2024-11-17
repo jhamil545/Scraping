@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Artículo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h2>Editar Artículo</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="/edit/{{ article.id }}" method="POST">
+                            <!-- Título -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Título</label>
+                                <input type="text" id="title" name="title" value="{{ article.title }}" class="form-control" placeholder="Introduce el título del artículo">
+                            </div>
+                            <!-- URL -->
+                            <div class="mb-3">
+                                <label for="url" class="form-label">URL</label>
+                                <input type="text" id="url" name="url" value="{{ article.url }}" class="form-control" placeholder="Introduce la URL del artículo">
+                            </div>
+                            <!-- Fecha de publicación -->
+                            <div class="mb-3">
+                                <label for="date_published" class="form-label">Fecha de Publicación</label>
+                                <input type="date" id="date_published" name="date_published" value="{{ article.date_published }}" class="form-control">
+                            </div>
+                            <!-- URL de la imagen -->
+                            <div class="mb-3">
+                                <label for="image_url" class="form-label">URL de la Imagen</label>
+                                <input type="text" id="image_url" name="image_url" value="{{ article.image_url }}" class="form-control" placeholder="Introduce la URL de la imagen">
+                            </div>
+                            <!-- ID del sitio web -->
+                            <div class="mb-3">
+                                <label for="website_id" class="form-label">ID del Sitio Web</label>
+                                <input type="text" id="website_id" name="website_id" value="{{ article.website_id }}" class="form-control" placeholder="Introduce el ID del sitio web">
+                            </div>
+                            <!-- Descripción -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Descripción</label>
+                                <textarea id="description" name="description" class="form-control" rows="3" placeholder="Introduce la descripción">{{ article.description }}</textarea>
+                            </div>
+                            <!-- Categoría -->
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Categoría</label>
+                                <input type="text" id="category" name="category" value="{{ article.category }}" class="form-control" placeholder="Introduce la categoría">
+                            </div>
+                            <!-- Botón de guardar -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Guardar Cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        <small>Asegúrate de que todos los campos estén correctamente llenados antes de guardar.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
